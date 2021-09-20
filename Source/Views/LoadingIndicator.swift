@@ -2,30 +2,35 @@ import UIKit
 
 class LoadingIndicator: UIView {
 
-  var indicator: UIActivityIndicatorView!
+    var indicator: UIActivityIndicatorView!
 
-  init() {
-    super.init(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+    var compensator: CGFloat = 1.5
 
-    backgroundColor = UIColor.darkGray
-    layer.cornerRadius = bounds.size.width / 2
-    clipsToBounds = true
-    alpha = 0
+    init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
 
-    indicator = UIActivityIndicatorView()
-    indicator.style = .whiteLarge
-    indicator.startAnimating()
+        backgroundColor = UIColor.darkGray
+        layer.cornerRadius = bounds.size.width / 2
+        clipsToBounds = true
+        alpha = 0
 
-    addSubview(indicator)
-  }
+        indicator = UIActivityIndicatorView()
+        indicator.style = .whiteLarge
+        indicator.startAnimating()
 
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
+        addSubview(indicator)
+    }
 
-  override func layoutSubviews() {
-    super.layoutSubviews()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-    indicator.center = CGPoint(x: bounds.size.width/2, y: bounds.size.height/2)
-  }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        indicator.center = CGPoint(
+            x: bounds.size.width/2 + compensator,
+            y: bounds.size.height/2 + compensator
+        )
+    }
+    
 }
